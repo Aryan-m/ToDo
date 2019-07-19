@@ -1,0 +1,97 @@
+﻿@model IEnumerable<ToDo.Models.ToDo>
+
+@if (ViewBag.tasks_left > 1)
+{
+    <p>@ViewBag.tasks_left more tasks left</p>
+}
+else if (ViewBag.tasks_left == 1)
+{
+    <p>@ViewBag.tasks_left more task left</p>
+}
+else
+{
+    <p>All Done!</p>
+}
+
+<div class="progress">
+    <div class="progress-bar" role="progressbar" style="width:@(Html.AttributeEncode(ViewBag.percent_complete))%"></div>
+</div>
+
+<table class="table">
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="ToDoRow InvisibleRow" data-taskid="@(item.ID)">
+                <td>
+                    @if (!item.is_done)
+                    {
+                        <div class="incomplete">
+                            @Html.DisplayFor(modelItem => item.content)
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="complete">
+                            @Html.DisplayFor(modelItem => item.content)
+                        </div>
+                    }
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => item.is_done, new { @class = "Is_Done", id = item.ID })
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script>
+    $(document).ready(
+        function () {
+            $('#editor').val('');
+            $(".Is_Done").change(function () {
+                var id = $(this).attr('id');
+                var val = $(this).prop('checked');
+                $.ajax
+                    (
+                    {
+                        url: 'ToDoes/Edit_Checked',
+                        data: { id: id, val: val },
+                        type: 'POST',
+                        error: function () {
+                            alert('Cannot get data from server!');
+                        }
+                    }
+                    ).done(function (data) {
+                        $("#hideMe").empty();
+                        $('#ToDoTable').html(data);
+                    }
+                    );
+            }
+            )
+            $('tbody').sortable(
+                {
+                    update: function (event, id) {
+                        var id_list = '';
+                        $('tbody').find('.ToDoRow').each(function () {
+                            id_list = id_list + $(this).attr('data-taskid') + ',';
+                        });
+                        $.ajax
+                            ({
+                                url: '@Url.Action("Edit_Order", "ToDoes")',
+                                data: { id_list: id_list },
+                                type: 'POST',
+                                error: function () {
+                                    alert('Cannot get data from server!');
+                                }
+                            }).done(function (data) {
+                                $("#hideMe").empty();
+                                $('#ToDoTable').html(data);
+                            });
+                    }
+                }
+            );
+        }
+    );
+</script>

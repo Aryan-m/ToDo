@@ -1,0 +1,130 @@
+﻿body {
+    background-image: url('https://img.freepik.com/free-photo/_42682-239.jpg?size=626&ext=jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding-top: 50px;
+    min-height: 100vh;
+    height: 100%;
+    font-family: 'Comic Sans MS';
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.incomplete {
+    color: black;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.complete {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.Is_Done {
+    zoom: 1.5;
+}
+
+.LoginButton {
+    -moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
+    box-shadow: inset 0px 1px 0px 0px #ffffff;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
+    background: -moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+    background: -webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+    background: -o-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+    background: -ms-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+    background: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0);
+    background-color: #f9f9f9;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    color: #666666;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 24px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #ffffff;
+    margin-top: 1em;
+}
+
+    .LoginButton:hover {
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9));
+        background: -moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+        background: -webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+        background: -o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+        background: -ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+        background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#f9f9f9',GradientType=0);
+        background-color: #e9e9e9;
+    }
+
+    .LoginButton:active {
+        position: relative;
+        top: 1px;
+    }
+
+.ToDoRow {
+    border-radius: 30px;
+    margin-bottom: 10px;
+    border-bottom: solid 2px gray;
+}
+
+    .ToDoRow:hover {
+        background-color: antiquewhite;
+    }
+
+td {
+    padding: 0 10px;
+}
+
+#framed_body {
+    background-color: lavender;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+/*#logo {
+    width: 20%;
+    max-height: 7em;
+    border-radius: 50%;
+    margin-top: 10px;
+}*/
+
+@keyframes fade {
+    from {
+        opacity: initial;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.InvisibleRow {
+    animation-name: fade;
+    animation-duration: 0.5s;
+}
