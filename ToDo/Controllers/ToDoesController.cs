@@ -129,30 +129,31 @@ namespace ToDo.Controllers
             
             return ToDoList();
         }
-        // GET: ToDoes/Delete/5
+
+        // POST: ToDoes/Delete/5
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            ApplicationUser cur_user = Get_Cur_User();
+
             ToDo.Models.ToDo toDo = db.ToDos.Find(id);
             if (toDo == null)
             {
                 return HttpNotFound();
             }
-            return View(toDo);
-        }
+            else if (toDo.user != cur_user)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
 
-        // POST: ToDoes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            ToDo.Models.ToDo toDo = db.ToDos.Find(id);
             db.ToDos.Remove(toDo);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return ToDoList();
         }
 
         protected override void Dispose(bool disposing)

@@ -128,3 +128,27 @@ td {
     animation-name: fade;
     animation-duration: 0.5s;
 }
+
+.Invisible {
+    display: none;
+}
+
+.trash {
+    width: 2em;
+    height: auto;
+    padding: 2px;
+    border-radius: 10px;
+    background: linear-gradient(lightblue, white);
+}
+
+    .trash:hover {
+        cursor: pointer;
+        background: linear-gradient(lightblue, red);
+    }
+
+.trash:focus, .trash:active {
+    background-color: darkred;
+}
+
+
+
