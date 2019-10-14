@@ -195,7 +195,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ToDoesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -208,6 +207,10 @@
     <Compile Include="Migrations\201907182256226_add_row_number.cs" />
     <Compile Include="Migrations\201907182256226_add_row_number.Designer.cs">
       <DependentUpon>201907182256226_add_row_number.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907210111045_add_is_important.cs" />
+    <Compile Include="Migrations\201907210111045_add_is_important.Designer.cs">
+      <DependentUpon>201907210111045_add_is_important.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -273,6 +276,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\Index.js" />
+    <Content Include="Scripts\ToDoList.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -295,12 +300,8 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -321,12 +322,9 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\ToDoes\Create.cshtml" />
-    <Content Include="Views\ToDoes\Delete.cshtml" />
-    <Content Include="Views\ToDoes\Details.cshtml" />
-    <Content Include="Views\ToDoes\Edit.cshtml" />
     <Content Include="Views\ToDoes\Index.cshtml" />
     <Content Include="Views\ToDoes\_ToDoList.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -351,6 +349,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907182256226_add_row_number.resx">
       <DependentUpon>201907182256226_add_row_number.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907210111045_add_is_important.resx">
+      <DependentUpon>201907210111045_add_is_important.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

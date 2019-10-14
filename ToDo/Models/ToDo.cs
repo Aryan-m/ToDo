@@ -11,6 +11,7 @@ namespace ToDo.Models
         public string content { get; set; }
         public bool is_done { get; set; }
         public int row_number { get; set; }
+        public bool is_important { get; set; }
         public virtual ApplicationUser user { get; set; }
     }
 }

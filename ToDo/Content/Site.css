@@ -39,6 +39,15 @@ textarea {
     color: gray;
 }
 
+.doneRow {
+    background: linear-gradient(#6bff93, #4fb36a);
+}
+
+.importantRow {
+    background: linear-gradient(yellow, yellow, white);
+}
+
+
 .Is_Done {
     zoom: 1.5;
 }
@@ -107,13 +116,6 @@ td {
     margin-top: 10px;
 }
 
-/*#logo {
-    width: 20%;
-    max-height: 7em;
-    border-radius: 50%;
-    margin-top: 10px;
-}*/
-
 @keyframes fade {
     from {
         opacity: initial;
@@ -133,7 +135,7 @@ td {
     display: none;
 }
 
-.trash {
+.rowImage {
     width: 2em;
     height: auto;
     padding: 2px;
@@ -141,14 +143,11 @@ td {
     background: linear-gradient(lightblue, white);
 }
 
-    .trash:hover {
+    .rowImage:hover {
         cursor: pointer;
         background: linear-gradient(lightblue, red);
     }
 
-.trash:focus, .trash:active {
-    background-color: darkred;
-}
-
-
-
+    .rowImage:focus, .rowImage:active {
+        background-color: darkred;
+    }

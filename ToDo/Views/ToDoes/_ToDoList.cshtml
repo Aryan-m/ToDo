@@ -21,7 +21,8 @@ else
     <tbody>
         @foreach (var item in Model)
         {
-            <tr class="ToDoRow" data-taskid="@(item.ID)">
+            <tr class="ToDoRow" data-taskid="@(item.ID)" data-isDone="@(item.is_done)"
+                data-isImportant="@(item.is_important)">
                 <td>
                     @if (!item.is_done)
                     {
@@ -37,83 +38,20 @@ else
                     }
                 </td>
                 <td>
-                    @Html.CheckBoxFor(modelItem => item.is_done, new { @class = "Is_Done", id = item.ID })
+                    @Html.CheckBoxFor(modelItem => item.is_done, new { @class = "Is_Done", id = item.ID, title = "Done" })
                 </td>
                 <td>
-                    <img class="trash" data-taskid="@(item.ID)" src="~/Content/images/trash.png" />
+                    <img class="rowImage importantIcon" title="Highlight Task" data-important="@(item.is_important)" data-importantID="@(item.ID)" src="~/Content/images/badge.png" />
+                </td>
+                <td>
+                    <img class="rowImage trash" title="Delete" data-taskid="@(item.ID)" src="~/Content/images/trash.png" />
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
+@Scripts.Render("~/bundles/jquery")
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-<script>
-    $(document).ready(
-        function () {
-            $('#editor').val('');
-            $(".Is_Done").change(function () {
-                var id = $(this).attr('id');
-                var val = $(this).prop('checked');
-                $.ajax
-                    (
-                    {
-                        url: 'ToDoes/Edit_Checked',
-                        data: { id: id, val: val },
-                        type: 'POST',
-                        error: function () {
-                            alert('Cannot get data from server!');
-                        }
-                    }
-                    ).done(function (data) {
-                        $("#hideMe").empty();
-                        $('#ToDoTable').html(data);
-                    }
-                    );
-            }
-            );
-            $('tbody').sortable(
-                {
-                    update: function (event, id) {
-                        var id_list = '';
-                        $('tbody').find('.ToDoRow').each(function () {
-                            id_list = id_list + $(this).attr('data-taskid') + ',';
-                        });
-                        $.ajax
-                            ({
-                                url: '@Url.Action("Edit_Order", "ToDoes")',
-                                data: { id_list: id_list },
-                                type: 'POST',
-                                error: function () {
-                                    alert('Cannot get data from server!');
-                                }
-                            }).done(function (data) {
-                                $("#hideMe").empty();
-                                $('#ToDoTable').html(data);
-                            });
-                    }
-                }
-            );
-            $('.trash').click(function () {
-                var id = $(this).attr('data-taskid'); // id of the selected item in database
-                $('.ToDoRow[data-taskid=' + id + ']').animate({ opacity: 0, backgroundColor: "#aa0000"}, "fast",
-                    function () {
-                    $.ajax
-                    ({
-                        url: '@Url.Action("Delete", "ToDoes")',
-                        data: { id: id },
-                        type: 'POST',
-                        error: function () {
-                            alert('Cannot access the server!');
-                        }
-                    }).done(function (data) {
-                        $("#hideMe").empty();
-                        $('#ToDoTable').html(data);
-                    });
-                    });
-
-            }
-            );
-        }
-    );
-</script>
+<script src="~/Scripts/ToDoList.js"></script>
