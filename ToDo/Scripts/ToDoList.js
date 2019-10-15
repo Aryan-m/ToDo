@@ -1,5 +1,8 @@
 ﻿$(document).ready(
     function () {
+        // Set up antiforgery token
+        var token = $('[name="__RequestVerificationToken"]').val();
+
         // Ajax request to change 'Checked' field of a to do item
         $('#editor').val('');
         $(".Is_Done").change(function () {
@@ -9,7 +12,7 @@
                 (
                 {
                     url: 'ToDoes/Edit_Checked',
-                    data: { id: id, val: val },
+                        data: { __RequestVerificationToken: token, id: id, val: val },
                     type: 'POST',
                     error: function () {
                         alert('Cannot get data from server!');
@@ -32,7 +35,7 @@
                     (
                     {
                         url: 'ToDoes/Edit_Important',
-                        data: { id: id, val: val },
+                            data: { __RequestVerificationToken: token, id: id, val: val },
                         type: 'POST',
                         error: function () {
                             alert('Cannot get data from server!');
@@ -45,6 +48,7 @@
                     );
             }
 
+            // Animations for background color change if item is marked important
             if ($(this).attr('data-important') == 'True') {
                 $('.ToDoRow[data-taskid=' + id + ']').animate({ backgroundColor: "white" }, "fast",
                     Important_Ajax);
@@ -53,6 +57,27 @@
                 $('.ToDoRow[data-taskid=' + id + ']').animate({ backgroundColor: "yellow" }, "fast",
                     Important_Ajax);
             }
+        }
+        );
+
+        // delete a to do item with a fade animation and make AJAX request to controller
+        $('.trash').click(function () {
+            var id = $(this).attr('data-taskid'); // id of the selected item in database
+            $('.ToDoRow[data-taskid=' + id + ']').animate({ opacity: 0, backgroundColor: "#aa0000" }, "fast",
+                function () {
+                    $.ajax
+                        ({
+                            url: 'ToDoes/Delete',
+                            data: { __RequestVerificationToken: token, id: id },
+                            type: 'POST',
+                            error: function () {
+                                alert('Cannot access the server!');
+                            }
+                        }).done(function (data) {
+                            $("#hideMe").empty();
+                            $('#ToDoTable').html(data);
+                        });
+                });
         }
         );
 
@@ -66,8 +91,8 @@
                     });
                     $.ajax
                         ({
-                            url: '@Url.Action("Edit_Order", "ToDoes")',
-                            data: { id_list: id_list },
+                            url: 'ToDoes/Edit_Order',
+                            data: { __RequestVerificationToken: token, id_list: id_list },
                             type: 'POST',
                             error: function () {
                                 alert('Cannot get data from server!');
@@ -78,27 +103,6 @@
                         });
                 }
             }
-        );
-
-        // delete a to do item with a fade animation and make AJAX request to controller
-        $('.trash').click(function () {
-            var id = $(this).attr('data-taskid'); // id of the selected item in database
-            $('.ToDoRow[data-taskid=' + id + ']').animate({ opacity: 0, backgroundColor: "#aa0000" }, "fast",
-                function () {
-                    $.ajax
-                        ({
-                            url: '@Url.Action("Delete", "ToDoes")',
-                            data: { id: id },
-                            type: 'POST',
-                            error: function () {
-                                alert('Cannot access the server!');
-                            }
-                        }).done(function (data) {
-                            $("#hideMe").empty();
-                            $('#ToDoTable').html(data);
-                        });
-                });
-        }
         );
 
         // add proper style class based on the isDone field of a to do list

@@ -53,7 +53,7 @@ namespace ToDo.Controllers
 
         // Called onto by an AJAX request to create a new to do item and return the partial view of new list
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,content,is_done,row_number")] ToDo.Models.ToDo toDo)
         {
             ApplicationUser cur_user = Get_Cur_User();

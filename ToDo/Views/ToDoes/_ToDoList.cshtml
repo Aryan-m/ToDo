@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<ToDo.Models.ToDo>
 
+@*This section sets up the progress bar using bootsrtap*@
 @if (ViewBag.tasks_left > 1)
 {
     <p>@ViewBag.tasks_left more tasks left</p>
@@ -17,6 +18,7 @@ else
     <div class="progress-bar" role="progressbar" style="width:@(Html.AttributeEncode(ViewBag.percent_complete))%"></div>
 </div>
 
+@*This section sets up the main to do list*@
 <table class="table">
     <tbody>
         @foreach (var item in Model)
@@ -51,7 +53,5 @@ else
     </tbody>
 </table>
 
-@Scripts.Render("~/bundles/jquery")
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
 <script src="~/Scripts/ToDoList.js"></script>
